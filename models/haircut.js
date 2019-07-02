@@ -6,6 +6,8 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
   hairCut.associate = function(models) {
     // associations can be defined here
+    models.hairCut.belongsTo(models.user);
+    models.hairCut.hasMany(models.photo);
   };
   return hairCut;
 };
