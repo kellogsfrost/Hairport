@@ -31,6 +31,8 @@ app.use(require('morgan')('dev'));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(__dirname + "/public"));
 app.use(ejsLayouts);
+var app = express();
+var upload = multer({dest: './uploads'});
 app.use(helmet());
 
 // Configures express-session middleware
@@ -64,6 +66,16 @@ app.get('/', function(req, res) {
 app.get('/profile', isLoggedIn, function(req, res) {
   res.render('profile');
 });
+
+app.post('/', upload.single('myFile'), function(req, res){
+  cloudinary.uploader.upload(req.file.path, function(result){
+    console.log(result)
+    var imgUrl = cloudinary.url(result.public_id, { width: 450, height: 400 });
+    res.render('index', {url: imgUrl});
+    // not working but can res render result
+  });
+});
+
 
 app.use('/auth', require('./controllers/auth'));
 
