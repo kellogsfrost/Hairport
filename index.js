@@ -66,15 +66,16 @@ app.get('/profile', isLoggedIn, function(req, res) {
   res.render('profile');
 });
 
-app.post('/profile', upload.single('myFile'), function(req, res){
-  cloudinary.uploader.upload(req.file.path, function(result){
-    console.log(result)
-    var imgUrl = cloudinary.url(result.public_id);
-    res.render('profile', {url: imgUrl});
-    // uploading put not displaying on page
-  });
-});
-
+// app.post('/profile', upload.single('myFile'), function(req, res){
+//   cloudinary.uploader.upload(req.file.path, function(result){
+//     console.log(result)
+//     //var imgUrl = cloudinary.url(result.public_id);
+//     res.render('profile');
+//     //{url: imgUrl});
+//     // uploading put not displaying on page
+//   });
+// });
+// this works routed version does not
 
 
 app.use('/auth', require('./controllers/auth'));
