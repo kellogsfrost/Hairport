@@ -14,7 +14,7 @@ const helmet = require('helmet');
 
 // This is only used by the session store
 const db = require('./models');
-
+const upload = multer({dest: './uploads'});
 const app = express();
 
 //This line makes the session use sequelize to write session data to a postgres table
@@ -31,11 +31,10 @@ app.use(require('morgan')('dev'));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(__dirname + "/public"));
 app.use(ejsLayouts);
-var app = express();
-var upload = multer({dest: './uploads'});
 app.use(helmet());
 
 // Configures express-session middleware
+
 app.use(session({
   secret: process.env.SESSION_SECRET,
   resave: false, 
@@ -67,14 +66,15 @@ app.get('/profile', isLoggedIn, function(req, res) {
   res.render('profile');
 });
 
-app.post('/', upload.single('myFile'), function(req, res){
+app.post('/profile', upload.single('myFile'), function(req, res){
   cloudinary.uploader.upload(req.file.path, function(result){
     console.log(result)
-    var imgUrl = cloudinary.url(result.public_id, { width: 450, height: 400 });
-    res.render('index', {url: imgUrl});
+    var imgUrl = cloudinary.url(result.public_id);
+    res.render('profile', {url: imgUrl});
     // not working but can res render result
   });
 });
+
 
 
 app.use('/auth', require('./controllers/auth'));
