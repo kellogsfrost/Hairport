@@ -71,7 +71,7 @@ app.post('/profile', upload.single('myFile'), function(req, res){
     console.log(result)
     var imgUrl = cloudinary.url(result.public_id);
     res.render('profile', {url: imgUrl});
-    // not working but can res render result
+    // uploading put not displaying on page
   });
 });
 
