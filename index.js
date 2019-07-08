@@ -75,7 +75,6 @@ app.get('/new', function(req, res){
 
 app.post('/photo', upload.single('myFile'), function(req, res){
   cloudinary.uploader.upload(req.file.path, function(result){
-
       db.photo.create({
           name: req.body.name,
           description: req.body.description,
