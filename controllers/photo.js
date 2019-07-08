@@ -11,22 +11,22 @@ var upload = multer({dest: './uploads'});
 
 // // ./app/controller.js
 // // Truncated
-router.post('/photo', upload.single('myFile'), function(req, res){
-    cloudinary.uploader.upload(req.file.path, function(result){
-        db.photos.create({
-            name: req.body.name,
-            description: req.body.description,
-            created_at: new Date(),
-            url: req.body.url
-    });
-    post.save(function (err) {
-        if(err){
-            res.send(err)
-        }
-        res.redirect('/');
-    });
-    });
-});
+// router.post('/photo', upload.single('myFile'), function(req, res){
+//     cloudinary.uploader.upload(req.file.path, function(result){
+//         db.photos.create({
+//             name: req.body.name,
+//             description: req.body.description,
+//             created_at: new Date(),
+//             url: req.body.url
+//     });
+//     post.save(function (err) {
+//         if(err){
+//             res.send(err)
+//         }
+//         res.redirect('/');
+//     });
+//     });
+// });
 
 // // ./app/controller.js
 // // Truncated for brevity

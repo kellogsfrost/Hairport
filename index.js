@@ -10,6 +10,11 @@ const flash = require('connect-flash');
 const isLoggedIn = require('./middleware/isLoggedIn');
 const helmet = require('helmet');
 
+const multer = require('multer');
+const cloudinary = require('cloudinary');
+var upload = multer({dest: './uploads'});
+
+
 // This is only used by the session store
 const db = require('./models');
 const app = express();
@@ -65,7 +70,28 @@ app.get('/profile', isLoggedIn, function(req, res) {
 
 app.get('/new', function(req, res){
   res.render('new');
-})
+});
+
+
+app.post('/photo', upload.single('myFile'), function(req, res){
+  cloudinary.uploader.upload(req.file.path, function(result){
+
+      db.photo.create({
+          name: req.body.name,
+          description: req.body.description,
+          created_at: new Date(),
+          userId: req.body.userId,
+          url: cloudinary.url(result.public_id)
+  }); console.log(result);
+  // photo.save(function (err) {
+  //     if(err){
+  //         res.send(err)
+  //     }
+      res.redirect('/');
+  });
+  });
+//});
+
 //app.use('profile', require('./controllers/profile'))
 app.use('/photo', require('./controllers/photo'));
 app.use('/auth', require('./controllers/auth'));
