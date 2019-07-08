@@ -4,11 +4,11 @@ module.exports = (sequelize, DataTypes) => {
     name: DataTypes.STRING,
     description: DataTypes.TEXT,
     postedOn: DataTypes.DATE,
-    hairCut_Id: DataTypes.INTEGER
+    user_Id: DataTypes.INTEGER,
+    url: DataTypes.INTEGER
   }, {});
   photo.associate = function(models) {
     // associations can be defined here
-    models.photo.belongsTo(models.hairCut);
   };
   return photo;
 };

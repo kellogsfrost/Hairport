@@ -17,7 +17,10 @@ module.exports = {
       postedOn: {
         type: Sequelize.DATE
       },
-      hairCut_Id: {
+      user_Id: {
+        type: Sequelize.INTEGER
+      },
+      url: {
         type: Sequelize.INTEGER
       },
       createdAt: {

@@ -2,19 +2,8 @@
 
 <p>Hello, <%= currentUser.name %></p>
 
-
-<form enctype="multipart/form-data" action="/profile" method="POST">
-  <input type="file" name="myFile">
-  <input type="text" name="name" placeholder="Name">
-  <input type="text" name="description" placeholder="Description">
-  <input type="submit">
-</form>
-
-<% if (typeof url === 'string' && url) { %>
-    <img style="width: 100%;" src="<%= url %>">
-<% } else { %>
-<p>GIVE ME PICY PICY FOO!!!!</p>
-<% } %>
-
+<button>
+<a href="/new">UPLOAD</a>
+</button>
 
 <a href="/">Home</a>

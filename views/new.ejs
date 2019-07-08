@@ -1,0 +1,13 @@
+<h2>Upload New Photo</h2>
+
+<p>Hello, <%= currentUser.name %></p>
+
+
+<form enctype="multipart/form-data" action="/photo" method="POST">
+  <input type="file" name="myFile">
+  <input type="text" name="name" placeholder="Name">
+  <input type="text" name="description" placeholder="Description">
+  <input type="submit">
+</form>
+
+<a href="/">Home</a>
