@@ -22,14 +22,14 @@ router.post('/photo', upload.single('myFile'), function(req, res){
             url: cloudinary.url(result.public_id)
         }); 
         console.log(result);
-              res.redirect('/photo');
+              res.redirect('/profile');
     });
   });
 
 
 
 router.get('photo/:id/edit', function (req, res) {
-  db.photo.find({image_id: req.params.id}, function (err, photos) {
+  db.photo.find({image_id: req.params.id}, function (photos) {
       res.render('views/edit', {photo: photos[0]});
   });
 }), router.put('/photo/:id', function (req, res) {
