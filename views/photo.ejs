@@ -1,0 +1,15 @@
+<html lang="en">
+<body class="container">
+<main>
+    <h1></h1><%= photo.title %></h1>
+    <% currentUser.photos.forEach(function(photo) { %>
+        <img src="<%= photo.image %>" style="max-height: 150px">
+                 <%= photo.description %>
+                <a href="/edit/<%= photo.image_id %>">Update</a>
+            <% }); %>
+ <button>
+<a href="/edit">Edit Your Photo</a>
+</button>
+
+</body>
+</html>

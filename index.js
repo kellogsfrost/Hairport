@@ -72,6 +72,9 @@ app.get('/new', function(req, res){
   res.render('new');
 });
 
+app.get('/photo', function(req, res){
+  res.render('photo');
+});
 
 app.post('/photo', upload.single('myFile'), function(req, res){
   cloudinary.uploader.upload(req.file.path, function(result){
@@ -86,8 +89,6 @@ app.post('/photo', upload.single('myFile'), function(req, res){
   });
 });
 
-//app.use('profile', require('./controllers/profile'))
-app.use('/photo', require('./controllers/photo'));
 app.use('/auth', require('./controllers/auth'));
 
 var server = app.listen(process.env.PORT || 3000);
