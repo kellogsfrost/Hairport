@@ -10,9 +10,7 @@ const flash = require('connect-flash');
 const isLoggedIn = require('./middleware/isLoggedIn');
 const helmet = require('helmet');
 
-const multer = require('multer');
-const cloudinary = require('cloudinary');
-var upload = multer({dest: './uploads'});
+
 
 
 // This is only used by the session store

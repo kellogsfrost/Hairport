@@ -18,14 +18,13 @@ router.post('/photo', upload.single('myFile'), function(req, res){
         db.photo.create({
             name: req.body.name,
             description: req.body.description,
-            created_at: new Date(),
             userId: req.body.userId,
             url: cloudinary.url(result.public_id)
-        }); console.log(result);
+        }); 
+        console.log(result);
               res.redirect('/photo');
     });
   });
-
 
 
 
