@@ -3,11 +3,10 @@
 <p>Hello, <%= currentUser.name %></p>
 
 
-<form enctype="multipart/form-data" action="/photo" method="POST">
-  <input type="file" name="myFile">
+<form enctype="multipart/form-data" action="/photo" method="GET">
   <input type="text" name="name" placeholder="Name">
   <input type="text" name="description" placeholder="Description">
-  <input type="text" name="tag" placeholder="tag">
+  <input type="text" name="tag" placeholder="Tag">
   <input type="submit">
 </form>
 

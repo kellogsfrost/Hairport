@@ -29,30 +29,23 @@ router.post('/photo', upload.single('myFile'), function(req, res){
 
 
 
-router.get('/edit', function (req, res) {
-  db.photo.find({image_id: req.params.id}, function (err, posts) {
+router.get('photo/:id/edit', function (req, res) {
+  db.photo.find({image_id: req.params.id}, function (err, photos) {
       if(err) res.send(err);
         // Render edit form
         //with existing post
       res.render('views/edit', {photo: photos[0]});
   });
-}, function (req, res) {
-    var oldName = req.body.old_id
-    var newName = req.body.image_id;
-    cloudinary.uploader.rename(oldName, newName,
-      function(error, result) {
-          if (error) res.send(error);
-          db.photos.findOneAndUpdate({image_id: oldName}, 
-              Object.assign({}, req.body, {image: result.url}), 
-              function (err) {
-              if (err) res.send(err);
-
-              res.redirect('/');
-          })
-      })
-
-}),
-
+}, router.put('/photo/:id', function (req, res) {
+    db.photo.update({  
+        name: req.body.name,
+        description: req.body.description
+    },{
+        where: {id: parseInt(req.params.id)}
+    }).then(function(req, res){
+        res.redirect('/photo/'+ req.params.id);
+    });
+    
 router.delete('photo/:id', function (req, res) {
   var photoId = req.body.photo_Id;
   cloudinary.uploader.destroy(photoId, function (result) {

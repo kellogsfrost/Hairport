@@ -68,26 +68,14 @@ app.get('/profile', isLoggedIn, function(req, res) {
   res.render('profile');
 });
 
-app.get('/new', function(req, res){
+app.get('/new', isLoggedIn, function(req, res){
   res.render('new');
 });
 
-app.get('/photo', function(req, res){
+app.get('/photo', isLoggedIn, function(req, res){
   res.render('photo');
 });
 
-app.post('/photo', upload.single('myFile'), function(req, res){
-  cloudinary.uploader.upload(req.file.path, function(result){
-      db.photo.create({
-          name: req.body.name,
-          description: req.body.description,
-          created_at: new Date(),
-          userId: req.body.userId,
-          url: cloudinary.url(result.public_id)
-      }); console.log(result);
-            res.redirect('/');
-  });
-});
 
 app.use('/auth', require('./controllers/auth'));
 
