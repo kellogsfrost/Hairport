@@ -31,9 +31,6 @@ router.post('/photo', upload.single('myFile'), function(req, res){
 
 router.get('photo/:id/edit', function (req, res) {
   db.photo.find({image_id: req.params.id}, function (err, photos) {
-      if(err) res.send(err);
-        // Render edit form
-        //with existing post
       res.render('views/edit', {photo: photos[0]});
   });
 }), router.put('/photo/:id', function (req, res) {
@@ -49,12 +46,12 @@ router.get('photo/:id/edit', function (req, res) {
 router.delete('photo/:id', function (req, res) {
   var photoId = req.body.photo_Id;
   cloudinary.uploader.destroy(photoId, function (result) {
-          Model.findOneAndRemove({ photo_Id: photoId }, function(err) {
-              if (err) res.send(err);
-              res.redirect('/profile');
-          });
+    db.dinosaur.destroy({
+          where: ({ photo_Id: photoId })
+        }).then(function(data){
+          (res.redirect('/profile'))
       });
+    });
 });
-
 
  module.exports = router;
