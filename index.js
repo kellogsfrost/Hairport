@@ -81,15 +81,10 @@ app.post('/photo', upload.single('myFile'), function(req, res){
           created_at: new Date(),
           userId: req.body.userId,
           url: cloudinary.url(result.public_id)
-  }); console.log(result);
-  // photo.save(function (err) {
-  //     if(err){
-  //         res.send(err)
-  //     }
-      res.redirect('/');
+      }); console.log(result);
+            res.redirect('/');
   });
-  });
-//});
+});
 
 //app.use('profile', require('./controllers/profile'))
 app.use('/photo', require('./controllers/photo'));
