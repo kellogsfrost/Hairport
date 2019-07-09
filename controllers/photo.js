@@ -36,7 +36,7 @@ router.get('photo/:id/edit', function (req, res) {
         //with existing post
       res.render('views/edit', {photo: photos[0]});
   });
-}, router.put('/photo/:id', function (req, res) {
+}), router.put('/photo/:id', function (req, res) {
     db.photo.update({  
         name: req.body.name,
         description: req.body.description
@@ -45,7 +45,7 @@ router.get('photo/:id/edit', function (req, res) {
     }).then(function(req, res){
         res.redirect('/photo/'+ req.params.id);
     });
-    
+}),
 router.delete('photo/:id', function (req, res) {
   var photoId = req.body.photo_Id;
   cloudinary.uploader.destroy(photoId, function (result) {
