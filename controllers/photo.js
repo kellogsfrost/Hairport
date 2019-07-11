@@ -18,11 +18,11 @@ router.get('/', function(req, res){
 router.post('/', upload.single('myFile'), function(req, res){
     cloudinary.uploader.upload(req.file.path, function(result){
       var imgUrl = cloudinary.url(result.public_id);
-      res.render('photo', {url: imgUrl});
         db.photo.create({
             name: req.body.name,
             description: req.body.description,
             userId: req.body.userId,
+            publicId: req.file.public_Id,
             url: cloudinary.url(result.public_id)
         }); 
         console.log(result);

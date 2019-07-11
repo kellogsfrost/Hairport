@@ -23,6 +23,9 @@ module.exports = {
       url: {
         type: Sequelize.TEXT
       },
+      publicId: {
+        type: Sequelize.TEXT
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

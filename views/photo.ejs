@@ -1,5 +1,4 @@
 
-<link rel="stylesheet" href="public/css/style.css">
 
 <% if (!photos) { %>
     <h3>You Have No Photos</h3>
@@ -7,7 +6,7 @@
     <% photos.forEach(function(photo) { %>
         <section>
             <div id="images">
-            <img src="<%= photo.url %>" alt="">
+            <img src="<%= photo.url %>">
             </div>
             <div id="info">
             <p><%= photo.description %> </p>
@@ -23,3 +22,8 @@
    <% }) %>
 
 <% } %>
+<button>
+<a href="/profile">Profile</a>
+</button>
+
+
