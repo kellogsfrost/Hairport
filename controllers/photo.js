@@ -17,6 +17,8 @@ router.get('/', function(req, res){
 
 router.post('/', upload.single('myFile'), function(req, res){
     cloudinary.uploader.upload(req.file.path, function(result){
+      var imgUrl = cloudinary.url(result.public_id);
+      res.render('photo', {url: imgUrl});
         db.photo.create({
             name: req.body.name,
             description: req.body.description,
@@ -28,30 +30,29 @@ router.post('/', upload.single('myFile'), function(req, res){
     });
   });
 
-
-router.get('/photo/:id/edit', function(req,res){
-  db.photo.findByPk(parseInt(req.params.id))
-    .then(function(result){
-        res.render('/edit', {photo: result});
+  router.get('/:id/edit', function(req,res){
+    console.log('hitting this route')
+    db.photo.findByPk(parseInt(req.params.id))
+      .then(function(photo){
+          console.log(photo)
+          res.render('edit', {photo});
+    });
   });
-});
 
-// router.get('photo/:id/edit', function (req, res) {
-//   db.photo.find({image_id: req.params.id}, function (photos) {
-//       res.render('views/edit', {photo: photos[0]});
-//   });
-// }), router.put('/photo/:id', function (req, res) {
-//     db.photo.update({  
-//         name: req.body.name,
-//         description: req.body.description
-//     },{
-//         where: {id: parseInt(req.params.id)}
-//     }).then(function(req, res){
-//         res.redirect('/photo/'+ req.params.id);
-//     });
-// }),
+router.put('/:id', function (req, res) {
+    db.photo.update({  
+        name: req.body.name,
+        description: req.body.description
+    },{
+        where: {id: parseInt(req.params.id)}
+    }).then(function(){
+        res.redirect('/photo');
+    });
+})
+
 
 router.delete('/:id', function (req, res) {
+  console.log("hello")
     db.photo.destroy({
           where: { id: parseInt(req.params.id)}
         }).then(function(result){

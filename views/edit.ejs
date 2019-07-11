@@ -1,11 +1,7 @@
 
 
-<form method="POST" action="/edit/<%= "photo.id" %>/?_method=PUT">
-<label for="photoName">Type</label>
-<input type="text" name="photoName" value="<%= photo.name %>" />
-
-<label for="photoName">Name</label>
-<input type="text" name="photoName" value="<%= photo.description %>"/>
-
+<form method="POST" action="/photo/<%= photo.id %>/?_method=PUT">
+<input type="text" name="name" value="<%= photo.name %>" />
+<input type="text" name="description" value="<%= photo.description %>"/>
 <input type="submit" value="Update photo details">
 </form>

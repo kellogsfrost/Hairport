@@ -2,18 +2,30 @@
 const express = require('express');
 const db = require('../models');
 const router = express.Router();
-const multer = require('multer');
-const cloudinary = require('cloudinary');
-const upload = multer({dest: './uploads'});
 
 
 
-router.get('/photo/:id/edit', function(req,res){
+
+
+router.get('/:id/edit', function(req,res){
+    console.log('hitting this route')
     db.photo.findByPk(parseInt(req.params.id))
-      .then(function(result){
-          res.render('/edit', {photo: result});
+      .then(function(photo){
+          console.log(photo)
+          res.render('/edit', {photo});
     });
   });
+
+router.put('/:id', function (req, res) {
+    db.photo.update({  
+        name: req.body.name,
+        description: req.body.description
+    },{
+        where: {id: parseInt(req.params.id)}
+    }).then(function(req, res){
+        res.redirect('/photo');
+    });
+})
 
 
 

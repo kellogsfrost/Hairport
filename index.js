@@ -33,7 +33,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.static(__dirname + "/public"));
 app.use(ejsLayouts);
 app.use(helmet());
-app.use(methodOverride('X-HTTP-Method-Override'))
+app.use(methodOverride('_method'))
 // Configures express-session middleware
 
 app.use(session({
@@ -67,15 +67,18 @@ app.get('/profile', isLoggedIn, function(req, res) {
   res.render('profile');
 });
 
+app.get('/edit', function(req, res){
+  res.render('edit')
+})
 
 app.use('/new', isLoggedIn, function(req, res){
   res.render('new');
 });
 
-app.use('/edit', require('./controllers/edit'));
+
+// app.use('/edit', require('./controllers/edit'));
 
 app.use('/photo', require('./controllers/photo'));
-
 
 app.use('/auth', require('./controllers/auth'));
 

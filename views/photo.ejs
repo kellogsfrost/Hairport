@@ -13,11 +13,11 @@
             <p><%= photo.description %> </p>
             <p><%= photo.name %> </p>
             </div>
-            <form method="POST" action="/<%= photo.id %>/?_method=DELETE">
+            <form method="POST" action="/photo/<%= photo.id %>/?_method=DELETE">
                 <input type="submit" value="DELETE">
             </form>
             <button>
-                <a href="/edit">Edit</a>
+                <a href="/photo/<%= photo.id %>/edit">Edit</a>
             </button>
         </section>
    <% }) %>
