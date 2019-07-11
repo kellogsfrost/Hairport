@@ -7,6 +7,7 @@ const session = require('express-session');
 const passport = require('./config/passportConfig');
 // module for flash message
 const flash = require('connect-flash');
+const methodOverride = require('method-override')
 const isLoggedIn = require('./middleware/isLoggedIn');
 const helmet = require('helmet');
 
@@ -32,7 +33,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.static(__dirname + "/public"));
 app.use(ejsLayouts);
 app.use(helmet());
-
+app.use(methodOverride('X-HTTP-Method-Override'))
 // Configures express-session middleware
 
 app.use(session({
@@ -66,16 +67,19 @@ app.get('/profile', isLoggedIn, function(req, res) {
   res.render('profile');
 });
 
-app.get('/new', isLoggedIn, function(req, res){
+
+app.use('/new', isLoggedIn, function(req, res){
   res.render('new');
 });
 
-app.get('/photo', isLoggedIn, function(req, res){
-  res.render('photo');
-});
+app.use('/edit', require('./controllers/edit'));
+
+app.use('/photo', require('./controllers/photo'));
 
 
 app.use('/auth', require('./controllers/auth'));
+
+
 
 var server = app.listen(process.env.PORT || 3000);
 

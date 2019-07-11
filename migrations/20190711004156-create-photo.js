@@ -17,7 +17,7 @@ module.exports = {
       postedOn: {
         type: Sequelize.DATE
       },
-      user_Id: {
+      userId: {
         type: Sequelize.INTEGER
       },
       url: {

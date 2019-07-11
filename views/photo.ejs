@@ -1,24 +1,25 @@
-<script type="text/javascript" src="https://product-gallery.cloudinary.com/all.js"></script>
 
-<div class="wrap" id="wrap"></div>
+<link rel="stylesheet" href="public/css/style.css">
 
-<script>
-  cloudinary.galleryWidget({
-    container: '#wrap',
-    cloudName: 'bigpapicloud',
-    mediaAssets: [{
-      tag: "short"
-    }, {
-      tag: "short",
-      mediaType: "video"
-    }],
-  }).render();
+<% if (!photos) { %>
+    <h3>You Have No Photos</h3>
+<% } else { %>
+    <% photos.forEach(function(photo) { %>
+        <section>
+            <div id="images">
+            <img src="<%= photo.url %>" alt="">
+            </div>
+            <div id="info">
+            <p><%= photo.description %> </p>
+            <p><%= photo.name %> </p>
+            </div>
+            <form method="POST" action="/<%= photo.id %>/?_method=DELETE">
+                <input type="submit" value="DELETE">
+            </form>
+            <button>
+                <a href="/edit">Edit</a>
+            </button>
+        </section>
+   <% }) %>
 
-</script>
-
-<button>
-<a href="/profile">Profile</a>
-</button>
-<button>
-<a href="/">Home</a>
-</button>
+<% } %>
