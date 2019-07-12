@@ -22,11 +22,12 @@ router.post('/', upload.single('myFile'), function(req, res){
             name: req.body.name,
             description: req.body.description,
             userId: req.body.userId,
-            publicId: req.file.public_Id,
-            url: cloudinary.url(result.public_id)
-        }); 
-        console.log(result);
-              res.redirect('/profile');
+            publicId: result.public_id,
+            image: imgUrl
+        }).then(function(data) {
+          console.log(result);
+          res.redirect('/profile');
+        })
     });
   });
 

@@ -20,11 +20,11 @@ module.exports = {
       userId: {
         type: Sequelize.INTEGER
       },
-      url: {
-        type: Sequelize.TEXT
+      image: {
+        type: Sequelize.STRING
       },
       publicId: {
-        type: Sequelize.TEXT
+        type: Sequelize.STRING
       },
       createdAt: {
         allowNull: false,

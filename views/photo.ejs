@@ -6,12 +6,17 @@
     <% photos.forEach(function(photo) { %>
         <section>
             <div id="images">
-            <img src="<%= photo.url %>">
+            <p><%= photo.image %></p>
+            <% if(typeof photo.image == 'string' && photo.image ){ %>
+                <img style="max-width: 100%;" src="<%= photo.image %>">
             </div>
             <div id="info">
             <p><%= photo.description %> </p>
             <p><%= photo.name %> </p>
             </div>
+        <%}else{%>
+        <p>You need to Upload</p>
+        <%}%>
             <form method="POST" action="/photo/<%= photo.id %>/?_method=DELETE">
                 <input type="submit" value="DELETE">
             </form>
